@@ -200,15 +200,15 @@ RDLATEST=$(curl https://api.github.com/repos/rustdesk/rustdesk-server/releases/l
 
 echo "Installing Rustdesk Server"
 if [ "${ARCH}" = "x86_64" ] ; then
-wget "https://github.com/rustdesk/rustdesk-server/releases/download/${RDLATEST}/rustdesk-server-linux-amd64.zip"
+wget -4 "https://github.com/rustdesk/rustdesk-server/releases/download/${RDLATEST}/rustdesk-server-linux-amd64.zip"
 unzip rustdesk-server-linux-amd64.zip
 mv amd64/* /opt/rustdesk/
 elif [ "${ARCH}" = "armv7l" ] ; then
-wget "https://github.com/rustdesk/rustdesk-server/releases/download/${RDLATEST}/rustdesk-server-linux-armv7.zip"
+wget -4 "https://github.com/rustdesk/rustdesk-server/releases/download/${RDLATEST}/rustdesk-server-linux-armv7.zip"
 unzip rustdesk-server-linux-armv7.zip
 mv armv7/* /opt/rustdesk/
 elif [ "${ARCH}" = "aarch64" ] ; then
-wget "https://github.com/rustdesk/rustdesk-server/releases/download/${RDLATEST}/rustdesk-server-linux-arm64v8.zip"
+wget -4 "https://github.com/rustdesk/rustdesk-server/releases/download/${RDLATEST}/rustdesk-server-linux-arm64v8.zip"
 unzip rustdesk-server-linux-arm64v8.zip
 mv arm64v8/* /opt/rustdesk/
 fi
@@ -304,11 +304,11 @@ echo "$string64rev"
 
 function setuphttp () {
     # Create windows install script
-    wget https://raw.githubusercontent.com/techahold/rustdeskinstall/master/WindowsAgentAIOInstall.ps1
+    wget -4 https://raw.githubusercontent.com/techahold/rustdeskinstall/master/WindowsAgentAIOInstall.ps1
     $SUDO sed -i "s|secure-string|${string64rev}|g" WindowsAgentAIOInstall.ps1
 
     # Create linux install script
-    wget https://raw.githubusercontent.com/techahold/rustdeskinstall/master/linuxclientinstall.sh
+    wget -4 https://raw.githubusercontent.com/techahold/rustdeskinstall/master/linuxclientinstall.sh
     $SUDO sed -i "s|secure-string|${string64rev}|g" linuxclientinstall.sh
 
     # Download and install gohttpserver
@@ -324,10 +324,10 @@ function setuphttp () {
 
     echo "Installing Go HTTP Server"
     if [ "${ARCH}" = "x86_64" ] ; then
-    wget "https://github.com/codeskyblue/gohttpserver/releases/download/${GOHTTPLATEST}/gohttpserver_${GOHTTPLATEST}_linux_amd64.tar.gz"
+    wget -4 "https://github.com/codeskyblue/gohttpserver/releases/download/${GOHTTPLATEST}/gohttpserver_${GOHTTPLATEST}_linux_amd64.tar.gz"
     tar -xf  gohttpserver_${GOHTTPLATEST}_linux_amd64.tar.gz 
     elif [ "${ARCH}" =  "aarch64" ] ; then
-    wget "https://github.com/codeskyblue/gohttpserver/releases/download/${GOHTTPLATEST}/gohttpserver_${GOHTTPLATEST}_linux_arm64.tar.gz"
+    wget -4 "https://github.com/codeskyblue/gohttpserver/releases/download/${GOHTTPLATEST}/gohttpserver_${GOHTTPLATEST}_linux_arm64.tar.gz"
     tar -xf  gohttpserver_${GOHTTPLATEST}_linux_arm64.tar.gz
     elif [ "${ARCH}" = "armv7l" ] ; then
     echo "Go HTTP Server not supported on 32bit ARM devices"
